@@ -1,0 +1,1 @@
+﻿Add-Migration AddMessageId -Context StatusTgBot.Api.Data.ApplicationDbContext -Verbose -OutputDir Data/Migrations -Project StatusTgBot.Api -StartupProject StatusTgBot.Api -Debug

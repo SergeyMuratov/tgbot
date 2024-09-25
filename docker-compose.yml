@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  postgres:
+      image: postgres:15.3-bullseye
+
+  statustgbot.api:
+    image: ${DOCKER_REGISTRY-}statustgbotapi
+    build:
+      context: .
+      dockerfile: src/StatusTgBot.Api/Dockerfile
+    depends_on:
+      - postgres

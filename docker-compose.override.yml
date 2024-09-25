@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  postgres:
+    container_name: 'postgres-statustgbot'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    volumes:
+       - botpostgresdata:/data/postgres
+    ports:
+      - "5422:5432"
+    restart: unless-stopped
+
+  statustgbot.api:
+    container_name: 'statustgbot-api'
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "5700:80"
+      - "5701:443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+volumes:
+  botpostgresdata:
